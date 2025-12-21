@@ -35,11 +35,15 @@ class ChurnModelService:
         ]
 
     def predict(self, payload: dict):
-        # zorg dat de volgorde klopt
         data = {k: payload[k] for k in self.feature_order}
         df = pd.DataFrame([data])
-
-        proba = self.model.predict_proba(df)[0][1]
-        pred = self.model.predict(df)[0]
-
-        return bool(pred), float(proba)
+    
+        pred = self.model.predict(df)[0]  # "No" of "Yes"
+    
+        # Pak probability voor "Yes" op basis van model.classes_
+        classes = list(self.model.classes_)  # verwacht ["No", "Yes"]
+        yes_idx = classes.index("Yes")
+        proba = float(self.model.predict_proba(df)[0][yes_idx])
+    
+        churn = (pred == "Yes")
+        return churn, proba
