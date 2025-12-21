@@ -15,6 +15,14 @@ def health():
         "model_version": service.version,
     }
 
+@app.get("/model-info")
+def model_info():
+    return {
+        "model_version": service.version,
+        "classes": list(service.model.classes_),
+        "features": service.feature_order,
+    }
+
 
 @app.post("/predict", response_model=ChurnResponse)
 def predict(request: ChurnRequest):
