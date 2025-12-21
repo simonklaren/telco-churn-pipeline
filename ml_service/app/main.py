@@ -18,7 +18,7 @@ def health():
 
 @app.post("/predict", response_model=ChurnResponse)
 def predict(request: ChurnRequest):
-    label, proba = service.predict(request.dict())
+    label, proba = service.predict(request.model_dump())
     return ChurnResponse(
         churn=label,
         probability=proba,
