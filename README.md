@@ -8,16 +8,6 @@ Repo: https://github.com/simonklaren/telco-churn-pipeline
 
 ---
 
-## Wat dit project doet
-
-- Gebruikt Telco churn data om een **classificatie-model** te trainen (churn: yes/no).
-- Vergelijkt minimaal twee modellen en evalueert performance (accuracy/precision/recall/F1/etc.).
-- Exporteert het “beste” model als een deploybaar artifact.
-- Serve’t het model via een **API** (in `ml_service`) zodat je predictions kunt doen vanuit een app/prototype.
-
-
----
-
 ## Repo-structuur
 
 - `data/`  
@@ -41,8 +31,9 @@ Repo: https://github.com/simonklaren/telco-churn-pipeline
 2) Notebook draaien
 Open notebooks/ in Jupyter / VSCode en run de training flow.
 Zorg dat het model artifact dat de API gebruikt gegenereerd is (bijv. een .pkl/.joblib/pipeline bestand).
+(Er staat al een getrained model in ml_service/models)
 
-3) API starten
+4) API starten
 Ga naar ml_service/ en start de service (hoe precies hangt af van je setup: venv/Docker).
 Doel: een endpoint waar je een predict-call tegenaan kunt doen.
 
